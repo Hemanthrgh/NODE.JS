@@ -11,8 +11,24 @@
 
 // just require express
 const express=require("express");
+const path=require("path");
 const port=8000;
 const app=express();
+
+
+app.set('view engine','ejs');//to set the view engine as ejs
+app.set('views',path.join(__dirname,'views'));//to set the path for view to view engine __dirname gibe current directory adress
+
+app.get('/',(req,res)=>{//it is running when url is "/"
+    // console.log(req);
+    // res.send('<h1>cool it is running!</h1>');
+    // // res.end('<h1>cool it is running!!!!</h1>');
+    return res.render("home",{title:"Home"});//redering the page and asigning the value to the variable
+})
+
+app.get('/Contacts',(req,res)=>{
+    return res.render("Contacts",{title:'Contact_List'});
+})
 
 app.listen(port,(err)=>
 {
@@ -22,3 +38,14 @@ app.listen(port,(err)=>
     console.log(`Yup server is start listening on port: ${port}`);
 }
 )
+
+
+
+
+
+// Which command will install express in your project?===npm istall express
+
+// __dirname gives the the directory name of the current module.
+
+// <%= x %> prints the value of x into the ejs template (HTML)
+
