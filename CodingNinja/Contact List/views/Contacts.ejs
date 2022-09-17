@@ -7,9 +7,20 @@
     <body>
         <h1>My Contact List</h1>
        <ul><%
-        for(let i=1;i<=10;i++){%>
-           <li> <%= i %></li>
+        for(let i of Contact_List){%>
+           <li> 
+            <p><%= i.name %></p>
+            <%= i.phone %>
+            </li>
             <%}
         %></ul> 
+        <form action="Update_Contact" method="post">
+            <input type="text" name="name" placeholder="name of Contact" required>
+            <input type="number" name="phone" placeholder="Contact number" required>
+            <button type="submit">Save</button>
+        </form>
     </body>
 </html>
+
+<!-- The placeholder attribute specifies a short hint that describes the expected value of an input field. -->
+<!-- The name attribute is acts as a key for the value entered in the input element, when the form is submitted and data is received at the server. -->

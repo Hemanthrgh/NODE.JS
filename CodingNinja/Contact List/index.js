@@ -18,16 +18,36 @@ const app=express();
 
 app.set('view engine','ejs');//to set the view engine as ejs
 app.set('views',path.join(__dirname,'views'));//to set the path for view to view engine __dirname gibe current directory adress
-
+app.use(express.urlencoded());//just for encode the data passed
 app.get('/',(req,res)=>{//it is running when url is "/"
     // console.log(req);
     // res.send('<h1>cool it is running!</h1>');
     // // res.end('<h1>cool it is running!!!!</h1>');
     return res.render("home",{title:"Home"});//redering the page and asigning the value to the variable
 })
-
+  const Contact_List=[
+        {
+            name:"HEMANTH",
+            phone:8311109560
+        },
+        {
+            name:"Rangegowda",
+            phone:8311109560
+        }
+    ]
 app.get('/Contacts',(req,res)=>{
-    return res.render("Contacts",{title:'Contact_List'});
+  
+    return res.render("Contacts",{
+        title:'Contact_List',
+        Contact_List:Contact_List
+});
+})
+
+app.post("/Update_Contact",(req,res)=>{
+    console.log(req.body.name);
+    Contact_List.push(req.body);
+    res.redirect("Contacts");
+
 })
 
 app.listen(port,(err)=>
