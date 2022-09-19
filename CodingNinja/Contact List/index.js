@@ -17,8 +17,10 @@ const app=express();
 
 
 app.set('view engine','ejs');//to set the view engine as ejs
-app.set('views',path.join(__dirname,'views'));//to set the path for view to view engine __dirname gibe current directory adress
-app.use(express.urlencoded());//just for encode the data passed
+app.set('views',path.join(__dirname,'views'));//to set the path for view to view engine __dirname grabe current directory adress
+app.use(express.urlencoded());//just for encode the data passed in the middle ware
+app.use(express.static("./assets"));
+
 app.get('/',(req,res)=>{//it is running when url is "/"
     // console.log(req);
     // res.send('<h1>cool it is running!</h1>');
@@ -49,6 +51,18 @@ app.post("/Update_Contact",(req,res)=>{
     res.redirect("Contacts");
 
 })
+//for delete the contact 
+app.get("/delete_Contact/",(req,res)=>{
+    console.log( req.query);
+    // get query from url
+    const phone=req.query.phone;
+     // const index=Contact_List.indexOf(phone);
+    const index=Contact_List.findIndex(contact=>contact.phone==phone);
+    console.log(phone,index);
+    if(index!=-1){}
+    Contact_List.splice(index,1);
+   return res.redirect("back");
+})
 
 app.listen(port,(err)=>
 {
@@ -68,4 +82,13 @@ app.listen(port,(err)=>
 // __dirname gives the the directory name of the current module.
 
 // <%= x %> prints the value of x into the ejs template (HTML)
+
+// Which among these are the task that a middleware function can perform?===Execute any code.
+// Make changes to the request and the response objects.
+// End the request-response cycle.
+// Call the next middleware function in the stack.
+
+// Before the controller, all the middlewares get executed in chronological order. So first middleware-1 is called. But since we haven’t called the next() function in it, the next middleware doesn’t get triggered. That is why only “middleware 1 is called” is printed.
+//
+// Query params can be used to send multiple query parameters
 

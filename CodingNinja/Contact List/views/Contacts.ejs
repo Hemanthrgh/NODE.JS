@@ -3,22 +3,36 @@
         <title>
             <%= title %>
         </title>
+        <script src="https://kit.fontawesome.com/fb88c996e1.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/css/home.css">
     </head>
     <body>
-        <h1>My Contact List</h1>
+        <header>
+        <h1 id="heading">
+            <i class="fa-solid fa-address-book"></i>
+            My Contact List</h1>
+    </header>
+    <div id="Contact_List_Container">
        <ul><%
         for(let i of Contact_List){%>
            <li> 
             <p><%= i.name %></p>
-            <%= i.phone %>
-            </li>
+            <p><%= i.phone %></p>
+            
+            <div class="delete_button">
+            <a href="/delete_Contact/?phone=<%= i.phone %>"> <i class="fa-solid fa-trash"></i></a>
+            </div></li>
             <%}
+            
         %></ul> 
         <form action="Update_Contact" method="post">
             <input type="text" name="name" placeholder="name of Contact" required>
             <input type="number" name="phone" placeholder="Contact number" required>
             <button type="submit">Save</button>
         </form>
+    </div>
+
+        <script src="/js/home.js"></script>
     </body>
 </html>
 

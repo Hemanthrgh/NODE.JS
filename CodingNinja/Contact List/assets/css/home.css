@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+}
+
+#heading{
+    text-align: center;
+    font-size: 2em;
+    color: burlywood;
+}
+#Contact_List_Container{
+    display: inline-block;
+    margin:0 25%;
+    
+}
+ ul {
+    justify-content: center;
+    /* list-style-position: inside; */
+  }
+li{
+    list-style: none;
+    text-align: center;
+    background-color: dodgerblue;
+    color: white;
+    width: auto;
+    display: flex;
+    justify-content: space-evenly;
+    margin: inherit;
+    font-size: 1.4em;
+} 
+
+input{
+    font-size: 1.2em;
+    padding: 0.3em;
+}
+
+form{
+    text-align: center;
+}
+
+form button{
+    font-size: 1.5em;
+    padding: 0.2em;
+    background: burlywood;
+    color: black;
+}
+button:hover{
+    background-color: green;
+    cursor: pointer;
+}
