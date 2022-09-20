@@ -11,8 +11,11 @@
 
 // just require express
 const express=require("express");
+const { get } = require("http");
 const path=require("path");
 const port=8000;
+const db=require("./config/mongoose");
+const Contact=require("./model/contact");
 const app=express();
 
 
@@ -38,30 +41,61 @@ app.get('/',(req,res)=>{//it is running when url is "/"
         }
     ]
 app.get('/Contacts',(req,res)=>{
-  
+    // get a data from DB
+  Contact.find({},(err,Contacts)=>{
+    if(err){
+        console.log("error in fetching data from db");
+        return;
+    }
     return res.render("Contacts",{
         title:'Contact_List',
-        Contact_List:Contact_List
+        Contact_List:Contacts
 });
+  })
+    
 })
 
 app.post("/Update_Contact",(req,res)=>{
     console.log(req.body.name);
-    Contact_List.push(req.body);
-    res.redirect("Contacts");
+    // Contact_List.push(req.body);
+    // res.redirect("Contacts");
+
+    // Create data in MongoDb server
+    Contact.create({
+        name:req.body.name,
+        phone:req.body.phone
+    },(err,newContact)=>{
+        if(err){
+            console.log("error in creating a Contact");
+            return;
+        }
+        console.log("*******",newContact);
+        return res.redirect("back")
+    })
 
 })
 //for delete the contact 
 app.get("/delete_Contact/",(req,res)=>{
-    console.log( req.query);
+    // console.log( req.query);
     // get query from url
-    const phone=req.query.phone;
+    // const phone=req.query.phone;
      // const index=Contact_List.indexOf(phone);
-    const index=Contact_List.findIndex(contact=>contact.phone==phone);
-    console.log(phone,index);
-    if(index!=-1){}
-    Contact_List.splice(index,1);
-   return res.redirect("back");
+    // const index=Contact_List.findIndex(contact=>contact.phone==phone);
+//     console.log(phone,index);
+//     if(index!=-1){
+//     Contact_List.splice(index,1);
+//    return res.redirect("back");}
+
+// get the id
+const id=req.query.id;
+
+// find the Contact in the DataBase using id and delete
+Contact.findByIdAndDelete(id,(err)=>{
+    if(err){
+        console.log("Error in deleting the Contact");
+    }
+    return res.redirect("back")
+})
 })
 
 app.listen(port,(err)=>
@@ -91,4 +125,13 @@ app.listen(port,(err)=>
 // Before the controller, all the middlewares get executed in chronological order. So first middleware-1 is called. But since we haven’t called the next() function in it, the next middleware doesn’t get triggered. That is why only “middleware 1 is called” is printed.
 //
 // Query params can be used to send multiple query parameters
+
+// Which of the following is not a NoSQL database ?MongoDB,SqLite 3,Firebase,None of the Above===SqLite
+
+// Under which category of NoSql do mongoDB falls?===Document databases
+// Wide Column Stores
+// Document databases 
+// Graph databases
+// None of the Above
+
 
