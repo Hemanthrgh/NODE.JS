@@ -8,3 +8,10 @@ router.get(`/`,homeController.home);
 router.use('/user',require("./users.js"));//it is uses the user and navigate to user.js
 
 module.exports=router;
+
+
+
+
+
+
+// /foo and /foo/ are treated the same by the express router.
