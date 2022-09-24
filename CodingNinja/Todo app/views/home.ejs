@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+    </head>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+
+        <form action="AddToDo" method="post">
+            <hr>
+            <DIV>
+               <p> DESCRIPTION </p>
+               <input type="text" name="Description" required>
+            </DIV>
+            <hr>
+           <div> 
+                <label for="Catogory">Catogory</label><br>
+                <select id="Catogory" name="Catogory" required>
+                    <option value="Personel"> Personel</option>
+                    <option value="Work">Work</option>
+                    <option value="School"> School</option>
+                    <option value="Cleaning"> Cleaning</option>
+                    <option value="Other"> Other</option>
+                  </select>
+            
+        
+                <label for="Due Date"> Due Date</label><br>
+                <input type="Date" name="Due_Date" required>
+            
+            </div>
+            <hr>
+            <button type="submit">ADD TASK</button>
+        
+        </form>
+
+        <ul>
+            <% 
+            for(let i of tasks){%>
+                <li>
+                    <form action="DeletToDo" method="">
+                        <input type="checkbox" name="<%= i.id %>" value="<%= i.id %>">
+                    <span><%= i.Description%></span>
+                    <span><%= i.Catogory%></span>
+                    <div>
+                    <%= i.Due_Date %>
+                </div>
+               
+                </li>
+                <%}
+            %>
+        </ul> 
+        <button type="submit" name="" value="">Delete</button>
+    </form>
+    </body>
+</html>
