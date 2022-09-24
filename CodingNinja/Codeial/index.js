@@ -1,7 +1,18 @@
 const express=require("express");
 const app=express();
+const expressLayouts=require("express-ejs-layouts");
 const port=8000;
 
+// to use static files like css js etc
+app.use(express.static("./assets"));
+
+// extract styles and scripts from sub folder into a layouts
+app.set("layout extractStyles",true);
+app.set("layout extractScripts",true);
+
+
+// use layouts
+app.use(expressLayouts);
 
 // use express router
 app.use("/",require(`./routes/index.js`));
@@ -24,4 +35,3 @@ app.listen(port,(err)=>{
 // Which of the following adds all the changes in files for staging?===git add
 
 // Which of the following command allows you to update the remote repository?===push
-
